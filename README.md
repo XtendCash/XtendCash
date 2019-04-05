@@ -22,13 +22,13 @@ Portions Copyright (c) 2012-2013 The Cryptonote developers.
 
 ## Information
 
-Xtend is a private cryptocurrency based on Monero. Xtend currently offers an incentivised full node layer, over the coming months we will be looking to support a secondary p2p network (Xtendnet) and a messenger that offers private communications based on the Signal protocol (Xtend Messenger).
+Xtend is a private cryptocurrency based on Monero. XtendCash currently offers an incentivised full node layer, over the coming months we will be looking to support a secondary p2p network (Xtendnet) and a messenger that offers private communications based on the Signal protocol (Xtend Messenger).
 
 More information on the project can be found on the website and in the whitepaper.
 
 Xtend is an open source project, and we encourage contributions from anyone with something to offer. For more information on contributing, please contact team@Xtend.network
 
-## Compiling Xtend from source
+## Compiling XtendCash from source
 
 ### Dependencies
 
