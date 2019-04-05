@@ -3,7 +3,7 @@
 <p align="center">
     <a href="https://github.com/xtend-project/xtend/commits/dev"><img alt="pipeline status" src="https://gitlab.com/xtendproject/xtend/badges/dev/pipeline.svg" /></a>
 </p>
-
+Copyright (c) 2019 The XtendCash Project.   
 Copyright (c) 2018 The Loki Project.   
 Portions Copyright (c) 2014-2018 The Monero Project.   
 Portions Copyright (c) 2012-2013 The Cryptonote developers.
