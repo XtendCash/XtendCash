@@ -11,9 +11,9 @@ Portions Copyright (c) 2012-2013 The Cryptonote developers.
 ## Development resources
 
 - Web: [xtendcash.com](https://xtendcash.com)
-- Telegram: [t.me/t.me/xtendcash](https://t.me/xtendcash)
-- Mail: [team@xtend.network](mailto:team@xtend.network)
-- GitHub: [https://github.com/xtend-project/xtend](https://github.com/xtend-project/xtend)
+- Telegram: [t.me/xtendcash](https://t.me/xtendcash)
+- Mail: [team@xtendcash.com](mailto:team@xtendcash.com)
+- GitHub: [https://github.com/XtendCash](https://github.com/XtendCash)
 - Discord: [https://discord.gg/67GXfD6](https://discord.gg/67GXfD6)
 
 ## Vulnerability disclosure
