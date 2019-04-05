@@ -10,8 +10,8 @@ Portions Copyright (c) 2012-2013 The Cryptonote developers.
 
 ## Development resources
 
-- Web: [xtend.network](https://xtend.network)
-- Telegram: [t.me/xtendCommunity](https://t.me/xtendCommunity)
+- Web: [xtendcash.com](https://xtendcash.com)
+- Telegram: [t.me/t.me/xtendcash](https://t.me/xtendcash)
 - Mail: [team@xtend.network](mailto:team@xtend.network)
 - GitHub: [https://github.com/xtend-project/xtend](https://github.com/xtend-project/xtend)
 - Discord: [https://discord.gg/67GXfD6](https://discord.gg/67GXfD6)
