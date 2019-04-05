@@ -73,9 +73,9 @@ set(crypto_private_headers
   skein_port.h
   cn_heavy_hash.hpp)
 
-loki_private_headers(cncrypto
+xtend_private_headers(cncrypto
   ${crypto_private_headers})
-loki_add_library(cncrypto
+xtend_add_library(cncrypto
   ${crypto_sources}
   ${crypto_headers}
   ${crypto_private_headers})
