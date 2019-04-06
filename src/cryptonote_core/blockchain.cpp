@@ -99,10 +99,10 @@ struct hard_fork_record
 static const hard_fork_record mainnet_hard_forks[] =
 {
   { network_version_7,                   1,      0, 1503046577 },
-  { network_version_8,                   64324,  0, 1533006000 },
-  { network_version_9_service_nodes,     101250, 0, 1537444800 },
-  { network_version_10_bulletproofs,     161849, 0, 1544743800 }, // 2018-12-13 23:30UTC
-  { network_version_11_infinite_staking, 234767, 0, 1554170400 }, // 2019-03-26 13:00AEDT
+  { network_version_8,                   3,  0, 1533006000 },
+  { network_version_9_service_nodes,     5, 0, 1537444800 },
+  { network_version_10_bulletproofs,     7, 0, 1544743800 }, // 2018-12-13 23:30UTC
+  { network_version_11_infinite_staking, 9, 0, 1554170400 }, // 2019-03-26 13:00AEDT
 };
 
 static const hard_fork_record testnet_hard_forks[] =
@@ -117,10 +117,10 @@ static const hard_fork_record testnet_hard_forks[] =
 static const hard_fork_record stagenet_hard_forks[] =
 {
   { network_version_7,                   1,     0, 1341378000 },
-  { network_version_8,                   64324, 0, 1533006000 },
-  { network_version_9_service_nodes,     96210, 0, 1536840000 },
-  { network_version_10_bulletproofs,     96211, 0, 1536840120 },
-  { network_version_11_infinite_staking, 147029, 0, 1551223964 }, // 2019-02-27 12:30 AEDT
+  { network_version_8,                   3, 0, 1533006000 },
+  { network_version_9_service_nodes,     5, 0, 1536840000 },
+  { network_version_10_bulletproofs,     7, 0, 1536840120 },
+  { network_version_11_infinite_staking, 9, 0, 1551223964 }, // 2019-02-27 12:30 AEDT
 };
 
 //------------------------------------------------------------------

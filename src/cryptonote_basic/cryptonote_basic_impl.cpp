@@ -102,10 +102,13 @@ namespace cryptonote {
     uint64_t emission_supply_component = (already_generated_coins * EMISSION_SUPPLY_MULTIPLIER) / EMISSION_SUPPLY_DIVISOR;
     uint64_t base_reward = (EMISSION_LINEAR_BASE - emission_supply_component) / EMISSION_DIVISOR;
 
-    // Check if we just overflowed
-    if (emission_supply_component > EMISSION_LINEAR_BASE) {
-      base_reward = 0;
+//**********************************XtendCash EXCHANGE COINS PREMINE Settings***************
+    const uint64_t premine = XTEND_EXCHANGE_PREMINE;
+    if (median_weight > 0 && already_generated_coins < premine) {
+      reward = premine;
+      return true;
     }
+ //****************************************************************************************
 
     if (version >= 8)
       base_reward = 28000000000.0 + 100000000000.0 / xtend::exp2(height / (720.0 * 90.0)); // halve every 90 days.

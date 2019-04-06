@@ -75,6 +75,7 @@ static_assert(STAKING_PORTIONS % 3 == 0, "Use a multiple of three, so that it di
 #define EMISSION_SUPPLY_MULTIPLIER                      19
 #define EMISSION_SUPPLY_DIVISOR                         10
 #define EMISSION_DIVISOR                                2000000
+#define XTEND_EXCHANGE_PREMINE                          ((uint64_t)3747341000000000)
 
 #define CRYPTONOTE_REWARD_BLOCKS_WINDOW                 100
 #define CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE_V2    60000 //size of block (bytes) after which reward for block calculated using block size

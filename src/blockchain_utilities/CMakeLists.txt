@@ -179,7 +179,7 @@ target_link_libraries(blockchain_export
 
 set_property(TARGET blockchain_export
 	PROPERTY
-	OUTPUT_NAME "xtend-blockchain-export")
+	OUTPUT_NAME "xtendcash-blockchain-export")
 install(TARGETS blockchain_export DESTINATION bin)
 
 xtend_add_executable(blockchain_blackball
@@ -201,7 +201,7 @@ target_link_libraries(blockchain_blackball
 
 set_property(TARGET blockchain_blackball
 	PROPERTY
-	OUTPUT_NAME "xtend-blockchain-mark-spent-outputs")
+	OUTPUT_NAME "xtendcash-blockchain-mark-spent-outputs")
 install(TARGETS blockchain_blackball DESTINATION bin)
 
 
@@ -223,7 +223,7 @@ target_link_libraries(blockchain_usage
 
 set_property(TARGET blockchain_usage
 	PROPERTY
-	OUTPUT_NAME "xtend-blockchain-usage")
+	OUTPUT_NAME "xtendcash-blockchain-usage")
 install(TARGETS blockchain_usage DESTINATION bin)
 
 xtend_add_executable(blockchain_ancestry
@@ -244,7 +244,7 @@ target_link_libraries(blockchain_ancestry
 
 set_property(TARGET blockchain_ancestry
 	PROPERTY
-	OUTPUT_NAME "xtend-blockchain-ancestry")
+	OUTPUT_NAME "xtendcash-blockchain-ancestry")
 install(TARGETS blockchain_ancestry DESTINATION bin)
 
 xtend_add_executable(blockchain_depth
@@ -286,7 +286,7 @@ target_link_libraries(blockchain_stats
 
 set_property(TARGET blockchain_stats
 	PROPERTY
-	OUTPUT_NAME "xtend-blockchain-stats")
+	OUTPUT_NAME "xtendcash-blockchain-stats")
 install(TARGETS blockchain_stats DESTINATION bin)
 
 xtend_add_executable(blockchain_prune_known_spent_data
@@ -308,7 +308,7 @@ target_link_libraries(blockchain_prune_known_spent_data
 
 set_property(TARGET blockchain_prune_known_spent_data
 	PROPERTY
-	OUTPUT_NAME "xtend-blockchain-prune-known-spent-data")
+	OUTPUT_NAME "xtendcash-blockchain-prune-known-spent-data")
 install(TARGETS blockchain_prune_known_spent_data DESTINATION bin)
 
 xtend_add_executable(blockchain_prune
