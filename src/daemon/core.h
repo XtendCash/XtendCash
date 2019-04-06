@@ -34,8 +34,8 @@
 #include "cryptonote_protocol/cryptonote_protocol_handler.h"
 #include "misc_log_ex.h"
 
-#undefXTEND_DEFAULT_LOG_CATEGORY
-#defineXTEND_DEFAULT_LOG_CATEGORY "daemon"
+#undef XTEND_DEFAULT_LOG_CATEGORY
+#define XTEND_DEFAULT_LOG_CATEGORY "daemon"
 
 namespace daemonize
 {

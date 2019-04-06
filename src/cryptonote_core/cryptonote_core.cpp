@@ -58,10 +58,10 @@ using namespace epee;
 #include "wipeable_string.h"
 #include "common/i18n.h"
 
-#include "common/loki_integration_test_hooks.h"
+#include "common/xtend_integration_test_hooks.h"
 
-#undefXTEND_DEFAULT_LOG_CATEGORY
-#defineXTEND_DEFAULT_LOG_CATEGORY "cn"
+#undef XTEND_DEFAULT_LOG_CATEGORY
+#define XTEND_DEFAULT_LOG_CATEGORY "cn"
 
 DISABLE_VS_WARNINGS(4355)
 
@@ -336,7 +336,7 @@ namespace cryptonote
     command_line::add_arg(desc, arg_reorg_notify);
     command_line::add_arg(desc, arg_block_rate_notify);
 
-#if defined(LOKI_ENABLE_INTEGRATION_TEST_HOOKS)
+#if defined(XTEND_ENABLE_INTEGRATION_TEST_HOOKS)
     command_line::add_arg(desc,xtend::arg_integration_test_hardforks_override);
     command_line::add_arg(desc,xtend::arg_integration_test_shared_mem_name);
 #endif
@@ -459,7 +459,7 @@ namespace cryptonote
   {
     start_time = std::time(nullptr);
 
-#if defined(LOKI_ENABLE_INTEGRATION_TEST_HOOKS)
+#if defined(XTEND_ENABLE_INTEGRATION_TEST_HOOKS)
     const std::string arg_integration_test_override_hardforks = command_line::get_arg(vm,xtend::arg_integration_test_hardforks_override);
 
     std::vector<std::pair<uint8_t, uint64_t>> integration_test_hardforks;
@@ -532,8 +532,8 @@ namespace cryptonote
       if (boost::filesystem::exists(old_files / "blockchain.bin"))
       {
         MWARNING("Found old-style blockchain.bin in " << old_files.string());
-        MWARNING("Loki now uses a new format. You can either remove blockchain.bin to start syncing");
-        MWARNING("the blockchain anew, or usextend-blockchain-export andxtend-blockchain-import to");
+        MWARNING("Xtend now uses a new format. You can either remove blockchain.bin to start syncing");
+        MWARNING("the blockchain anew, or use xtend-blockchain-export and xtend-blockchain-import to");
         MWARNING("convert your existing blockchain.bin to the new format. See README.md for instructions.");
         return false;
       }
@@ -559,7 +559,7 @@ namespace cryptonote
 
     if (m_nettype == FAKECHAIN)
     {
-#if !defined(LOKI_ENABLE_INTEGRATION_TEST_HOOKS) // In integration mode, don't delete the DB. This should be explicitly done in the tests. Otherwise the more likely behaviour is persisting the DB across multiple daemons in the same test.
+#if !defined(XTEND_ENABLE_INTEGRATION_TEST_HOOKS) // In integration mode, don't delete the DB. This should be explicitly done in the tests. Otherwise the more likely behaviour is persisting the DB across multiple daemons in the same test.
       // reset the db by removing the database file before opening it
       if (!db->remove_data_file(filename))
       {
@@ -1758,7 +1758,7 @@ namespace cryptonote
     m_miner.on_idle();
     m_mempool.on_idle();
 
-#if defined(LOKI_ENABLE_INTEGRATION_TEST_HOOKS)
+#if defined(XTEND_ENABLE_INTEGRATION_TEST_HOOKS)
    xtend::core_is_idle = true;
 #endif
 
@@ -1809,7 +1809,7 @@ namespace cryptonote
   //-----------------------------------------------------------------------------------------------
   bool core::check_updates()
   {
-    static const char software[] = "loki";
+    static const char software[] = "xtend";
 #ifdef BUILD_TAG
     static const char buildtag[] = BOOST_PP_STRINGIZE(BUILD_TAG);
     static const char subdir[] = "cli"; // because it can never be simple
@@ -1972,7 +1972,7 @@ namespace cryptonote
       return true;
     }
 
-#if defined(LOKI_ENABLE_INTEGRATION_TEST_HOOKS)
+#if defined(XTEND_ENABLE_INTEGRATION_TEST_HOOKS)
     MDEBUG("Not checking block rate, integration test mode");
     return true;
 #endif

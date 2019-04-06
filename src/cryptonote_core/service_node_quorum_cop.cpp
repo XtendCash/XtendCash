@@ -33,10 +33,10 @@
 #include "cryptonote_core.h"
 #include "version.h"
 
-#include "common/loki_integration_test_hooks.h"
+#include "common/xtend_integration_test_hooks.h"
 
-#undefXTEND_DEFAULT_LOG_CATEGORY
-#defineXTEND_DEFAULT_LOG_CATEGORY "quorum_cop"
+#undef XTEND_DEFAULT_LOG_CATEGORY
+#define XTEND_DEFAULT_LOG_CATEGORY "quorum_cop"
 
 namespace service_nodes
 {
@@ -75,7 +75,7 @@ namespace service_nodes
       return;
 
     time_t const now          = time(nullptr);
-#if defined(LOKI_ENABLE_INTEGRATION_TEST_HOOKS)
+#if defined(XTEND_ENABLE_INTEGRATION_TEST_HOOKS)
     time_t const min_lifetime = 0;
 #else
     time_t const min_lifetime = 60 * 60 * 2;
@@ -107,7 +107,7 @@ namespace service_nodes
       const std::shared_ptr<const quorum_state> state = m_core.get_quorum_state(m_last_height);
       if (!state)
       {
-        // TODO(loki): Fatal error
+        // TODO(xtend): Fatal error
         LOG_ERROR("Quorum state for height: " << m_last_height << "was not cached in daemon!");
         continue;
       }
@@ -190,9 +190,9 @@ namespace service_nodes
 
   void quorum_cop::generate_uptime_proof_request(cryptonote::NOTIFY_UPTIME_PROOF::request& req) const
   {
-    req.snode_version_major = static_cast<uint16_t>(LOKI_VERSION_MAJOR);
-    req.snode_version_minor = static_cast<uint16_t>(LOKI_VERSION_MINOR);
-    req.snode_version_patch = static_cast<uint16_t>(LOKI_VERSION_PATCH);
+    req.snode_version_major = static_cast<uint16_t>(XTEND_VERSION_MAJOR);
+    req.snode_version_minor = static_cast<uint16_t>(XTEND_VERSION_MINOR);
+    req.snode_version_patch = static_cast<uint16_t>(XTEND_VERSION_PATCH);
 
     // 2.0.x will only accept a v10 uptime proof with a snode_version_major == 2 instead of >= 2, so
     // if we're sending such a proof fake the version as 2.3.x instead of 3.0.x to keep 2.0.x nodes

@@ -166,7 +166,7 @@ namespace service_nodes
   };
 
   template<typename T>
-  voidxtend_shuffle(std::vector<T>& a, uint64_t seed);
+  void xtend_shuffle(std::vector<T>& a, uint64_t seed);
 
   class service_node_list
     : public cryptonote::Blockchain::BlockAddedHook,

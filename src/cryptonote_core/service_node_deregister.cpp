@@ -42,8 +42,8 @@
 #include <string>
 #include <vector>
 
-#undefXTEND_DEFAULT_LOG_CATEGORY
-#defineXTEND_DEFAULT_LOG_CATEGORY "service_nodes"
+#undef XTEND_DEFAULT_LOG_CATEGORY
+#define XTEND_DEFAULT_LOG_CATEGORY "service_nodes"
 
 namespace service_nodes
 {

@@ -45,8 +45,8 @@
 #include "net/network_throttle-detail.hpp"
 #include "common/pruning.h"
 
-#undefXTEND_DEFAULT_LOG_CATEGORY
-#defineXTEND_DEFAULT_LOG_CATEGORY "net.cn"
+#undef XTEND_DEFAULT_LOG_CATEGORY
+#define XTEND_DEFAULT_LOG_CATEGORY "net.cn"
 
 #define MLOG_P2P_MESSAGE(x) MCINFO("net.p2p.msg", context << x)
 #define MLOG_PEER_STATE(x) \

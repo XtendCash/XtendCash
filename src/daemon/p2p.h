@@ -35,8 +35,8 @@
 #include "p2p/net_node.h"
 #include "daemon/protocol.h"
 
-#undefXTEND_DEFAULT_LOG_CATEGORY
-#defineXTEND_DEFAULT_LOG_CATEGORY "daemon"
+#undef XTEND_DEFAULT_LOG_CATEGORY
+#define XTEND_DEFAULT_LOG_CATEGORY "daemon"
 
 namespace daemonize
 {

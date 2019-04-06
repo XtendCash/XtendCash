@@ -51,8 +51,8 @@
 #include "common/stack_trace.h"
 #endif // STACK_TRACE
 
-#undefXTEND_DEFAULT_LOG_CATEGORY
-#defineXTEND_DEFAULT_LOG_CATEGORY "daemon"
+#undef XTEND_DEFAULT_LOG_CATEGORY
+#define XTEND_DEFAULT_LOG_CATEGORY "daemon"
 
 namespace po = boost::program_options;
 namespace bf = boost::filesystem;

@@ -38,8 +38,8 @@
 #include <boost/thread/recursive_mutex.hpp>
 #include <boost/uuid/uuid.hpp>
 
-#undefXTEND_DEFAULT_LOG_CATEGORY
-#defineXTEND_DEFAULT_LOG_CATEGORY "cn.block_queue"
+#undef XTEND_DEFAULT_LOG_CATEGORY
+#define XTEND_DEFAULT_LOG_CATEGORY "cn.block_queue"
 
 namespace cryptonote
 {

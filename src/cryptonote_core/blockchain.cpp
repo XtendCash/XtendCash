@@ -61,8 +61,8 @@
 #include "common/varint.h"
 #include "common/pruning.h"
 
-#undefXTEND_DEFAULT_LOG_CATEGORY
-#defineXTEND_DEFAULT_LOG_CATEGORY "blockchain"
+#undef XTEND_DEFAULT_LOG_CATEGORY
+#define XTEND_DEFAULT_LOG_CATEGORY "blockchain"
 
 #define FIND_BLOCKCHAIN_SUPPLEMENT_MAX_SIZE (100*1024*1024) // 100 MB
 
@@ -334,7 +334,7 @@ bool Blockchain::init(BlockchainDB* db, const network_type nettype, bool offline
 
   m_db = db;
 
-#if defined(LOKI_ENABLE_INTEGRATION_TEST_HOOKS)
+#if defined(XTEND_ENABLE_INTEGRATION_TEST_HOOKS)
   // NOTE(doyle): Passing in test options in integration mode means we're
   // overriding fork heights for any nettype in our integration tests using
   // a command line argument. So m_nettype should just be nettype. In
@@ -351,7 +351,7 @@ bool Blockchain::init(BlockchainDB* db, const network_type nettype, bool offline
   if (m_hardfork == nullptr)
     m_hardfork = new HardFork(*db, 7);
 
-#defineXTEND_ARRAY_COUNT(array) (sizeof(array)/sizeof(array[0]))
+#define XTEND_ARRAY_COUNT(array) (sizeof(array)/sizeof(array[0]))
   if (test_options) // Fakechain mode or in integration testing mode we're overriding hardfork dates
   {
     for (auto n = 0u; n < test_options->hard_forks.size(); ++n)
@@ -363,17 +363,17 @@ bool Blockchain::init(BlockchainDB* db, const network_type nettype, bool offline
   else
   {
     hard_fork_record const *hf_record = mainnet_hard_forks;
-    int hf_record_num_entries         =XTEND_ARRAY_COUNT(mainnet_hard_forks);
+    int hf_record_num_entries         = XTEND_ARRAY_COUNT(mainnet_hard_forks);
 
     if (m_nettype == TESTNET)
     {
       hf_record             = testnet_hard_forks;
-      hf_record_num_entries =XTEND_ARRAY_COUNT(testnet_hard_forks);
+      hf_record_num_entries = XTEND_ARRAY_COUNT(testnet_hard_forks);
     }
     else if (m_nettype == STAGENET)
     {
       hf_record             = stagenet_hard_forks;
-      hf_record_num_entries =XTEND_ARRAY_COUNT(stagenet_hard_forks);
+      hf_record_num_entries = XTEND_ARRAY_COUNT(stagenet_hard_forks);
     }
 
     for (int n = 0; n < hf_record_num_entries; ++n)
@@ -1206,7 +1206,7 @@ bool Blockchain::validate_miner_transaction(const block& b, size_t cumulative_bl
   std::vector<uint64_t> last_blocks_weights;
   get_last_n_blocks_weights(last_blocks_weights, CRYPTONOTE_REWARD_BLOCKS_WINDOW);
 
- xtend_block_reward_context block_reward_context = {};
+  xtend_block_reward_context block_reward_context = {};
   block_reward_context.fee                       = fee;
   block_reward_context.height                    = height;
   if (!calc_batched_governance_reward(height, block_reward_context.batched_governance))
@@ -1216,7 +1216,7 @@ bool Blockchain::validate_miner_transaction(const block& b, size_t cumulative_bl
   }
 
   block_reward_parts reward_parts;
-  if (!get_loki_block_reward(epee::misc_utils::median(last_blocks_weights), cumulative_block_weight, already_generated_coins, version, reward_parts, block_reward_context))
+  if (!get_xtend_block_reward(epee::misc_utils::median(last_blocks_weights), cumulative_block_weight, already_generated_coins, version, reward_parts, block_reward_context))
   {
     MERROR_VER("block weight " << cumulative_block_weight << " is bigger than allowed for this blockchain");
     return false;
@@ -1425,7 +1425,7 @@ bool Blockchain::create_block_template(block& b, const account_public_address& m
   //make blocks coin-base tx looks close to real coinbase tx to get truthful blob weight
   uint8_t hf_version = m_hardfork->get_current_version();
 
- xtend_miner_tx_context miner_tx_context(m_nettype,
+  xtend_miner_tx_context miner_tx_context(m_nettype,
                                          m_service_node_list.select_winner(),
                                          m_service_node_list.get_winner_addresses_and_portions());
 
@@ -1904,7 +1904,7 @@ void Blockchain::get_output_key_mask_unlocked(const uint64_t& amount, const uint
 //------------------------------------------------------------------
 bool Blockchain::get_output_distribution(uint64_t amount, uint64_t from_height, uint64_t to_height, uint64_t &start_height, std::vector<uint64_t> &distribution, uint64_t &base) const
 {
-  // rct outputs don't exist before v4, NOTE(loki): we started from v7 so our start is always 0
+  // rct outputs don't exist before v4, NOTE(xtend): we started from v7 so our start is always 0
   start_height = 0;
   base = 0;
 
@@ -2491,12 +2491,12 @@ bool Blockchain::check_tx_outputs(const transaction& tx, tx_verification_context
   CRITICAL_REGION_LOCAL(m_blockchain_lock);
 
   for (const auto &o: tx.vout) {
-    if (o.amount != 0) { // in a v2 tx, all outputs must have 0 amount NOTE(loki): Allxtend tx's are atleast v2 from the beginning
+    if (o.amount != 0) { // in a v2 tx, all outputs must have 0 amount NOTE(xtend): Allxtend tx's are atleast v2 from the beginning
       tvc.m_invalid_output = true;
       return false;
     }
 
-    // from hardfork v4, forbid invalid pubkeys NOTE(loki): We started from hf7 so always execute branch
+    // from hardfork v4, forbid invalid pubkeys NOTE(xtend): We started from hf7 so always execute branch
     if (o.target.type() == typeid(txout_to_key)) {
       const txout_to_key& out_to_key = boost::get<txout_to_key>(o.target);
       if (!crypto::check_key(out_to_key.key)) {
@@ -2526,7 +2526,7 @@ bool Blockchain::check_tx_outputs(const transaction& tx, tx_verification_context
       uint64_t curr_height = this->get_current_blockchain_height();
       if (curr_height == hf10_height)
       {
-        // NOTE(loki): Allow the hardforking block to contain a borromean proof
+        // NOTE(xtend): Allow the hardforking block to contain a borromean proof
         // incase there were some transactions in the TX Pool that were
         // generated pre-HF10 rules. Note, this isn't bulletproof. If there were
         // more than 1 blocks worth of borromean proof TX's sitting in the pool

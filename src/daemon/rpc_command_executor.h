@@ -46,8 +46,8 @@
 #include "cryptonote_basic/cryptonote_basic.h"
 #include "rpc/core_rpc_server.h"
 
-#undefXTEND_DEFAULT_LOG_CATEGORY
-#defineXTEND_DEFAULT_LOG_CATEGORY "daemon"
+#undef XTEND_DEFAULT_LOG_CATEGORY
+#define XTEND_DEFAULT_LOG_CATEGORY "daemon"
 
 namespace daemonize {
 

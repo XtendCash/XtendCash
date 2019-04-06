@@ -53,8 +53,8 @@
 
 #include "cryptonote_core/cryptonote_core.h" // e.g. for the send_stop_signal()
 
-#undefXTEND_DEFAULT_LOG_CATEGORY
-#defineXTEND_DEFAULT_LOG_CATEGORY "net.cn"
+#undef XTEND_DEFAULT_LOG_CATEGORY
+#define XTEND_DEFAULT_LOG_CATEGORY "net.cn"
 
 // ################################################################################################
 // ################################################################################################

@@ -42,8 +42,8 @@
 #include "service_node_list.h"
 #include "service_node_rules.h"
 
-#undefXTEND_DEFAULT_LOG_CATEGORY
-#defineXTEND_DEFAULT_LOG_CATEGORY "service_nodes"
+#undef XTEND_DEFAULT_LOG_CATEGORY
+#define XTEND_DEFAULT_LOG_CATEGORY "service_nodes"
 
 namespace service_nodes
 {
@@ -321,7 +321,7 @@ namespace service_nodes
 
     if (!state)
     {
-      // TODO(loki): Not being able to find a quorum is fatal! We want better caching abilities.
+      // TODO(xtend): Not being able to find a quorum is fatal! We want better caching abilities.
       MERROR("Quorum state for height: " << deregister.block_height << ", was not stored by the daemon");
       return false;
     }
@@ -806,7 +806,7 @@ namespace service_nodes
     int hard_fork_version = m_blockchain.get_hard_fork_version(block_height);
     if (hard_fork_version >= cryptonote::network_version_11_infinite_staking)
     {
-      // NOTE(loki): Grace period is not used anymore with infinite staking. So, if someone somehow reregisters, we just ignore it
+      // NOTE(xtend): Grace period is not used anymore with infinite staking. So, if someone somehow reregisters, we just ignore it
       const auto iter = m_service_nodes_infos.find(key);
       if (iter != m_service_nodes_infos.end())
         return false;
@@ -1141,7 +1141,7 @@ namespace service_nodes
             if (unlock.key_image != locked_contribution->key_image)
               continue;
 
-            // NOTE(loki): This should be checked in blockchain check_tx_inputs already
+            // NOTE(xtend): This should be checked in blockchain check_tx_inputs already
             crypto::hash const hash = service_nodes::generate_request_stake_unlock_hash(unlock.nonce);
             if (!crypto::check_signature(hash, locked_contribution->key_image_pub_key, unlock.signature))
             {
@@ -1261,7 +1261,7 @@ namespace service_nodes
     std::vector<crypto::public_key> expired_nodes;
     uint64_t const lock_blocks = staking_num_lock_blocks(m_blockchain.nettype());
 
-    // TODO(loki): This should really use the registration height instead of getting the block and expiring nodes.
+    // TODO(xtend): This should really use the registration height instead of getting the block and expiring nodes.
     // But there's something subtly off when using registration height causing syncing problems.
     if (m_blockchain.get_hard_fork_version(block_height) == cryptonote::network_version_9_service_nodes)
     {
@@ -1378,7 +1378,7 @@ namespace service_nodes
     if (hard_fork_version < 9)
       return true;
 
-    // NOTE(loki): Service node reward distribution is calculated from the
+    // NOTE(xtend): Service node reward distribution is calculated from the
     // original amount, i.e. 50% of the original base reward goes to service
     // nodes not 50% of the reward after removing the governance component (the
     // adjusted base reward post hardfork 10).
@@ -1433,7 +1433,7 @@ namespace service_nodes
   }
 
   template<typename T>
-  voidxtend_shuffle(std::vector<T>& a, uint64_t seed)
+  void xtend_shuffle(std::vector<T>& a, uint64_t seed)
   {
     if (a.size() <= 1) return;
     std::mt19937_64 mersenne_twister(seed);
@@ -1802,7 +1802,7 @@ namespace service_nodes
     }
 
     //
-    // FIXME(doyle): FIXME(loki) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // FIXME(doyle): FIXME(xtend) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // This is temporary code to redistribute the insufficient portion dust
     // amounts between contributors. It should be removed in HF12.
     //
@@ -1810,13 +1810,13 @@ namespace service_nodes
     std::array<uint64_t, MAX_NUMBER_OF_CONTRIBUTORS * service_nodes::MAX_KEY_IMAGES_PER_CONTRIBUTOR> min_contributions;
     {
       // NOTE: Calculate excess portions from each contributor
-      uint64_txtend_reserved = 0;
+      uint64_t xtend_reserved = 0;
       for (size_t index = 0; index < addr_to_portions.size(); ++index)
       {
         addr_to_portion_t const &addr_to_portion = addr_to_portions[index];
-        uint64_t min_contribution_portions       = service_nodes::get_min_node_contribution_in_portions(hf_version, staking_requirement,xtend_reserved, index);
-        uint64_txtend_amount                     = service_nodes::portions_to_amount(staking_requirement, addr_to_portion.portions);
-       xtend_reserved                           +=xtend_amount;
+        uint64_t min_contribution_portions       = service_nodes::get_min_node_contribution_in_portions(hf_version, staking_requirement, xtend_reserved, index);
+        uint64_t xtend_amount                     = service_nodes::portions_to_amount(staking_requirement, addr_to_portion.portions);
+        xtend_reserved                           += xtend_amount;
 
         uint64_t excess = 0;
         if (addr_to_portion.portions > min_contribution_portions)
@@ -1885,8 +1885,8 @@ namespace service_nodes
       portions_left += portions_to_steal;
       result.addresses.push_back(addr_to_portion.info.address);
       result.portions.push_back(addr_to_portion.portions);
-      uint64_txtend_amount = service_nodes::portions_to_amount(addr_to_portion.portions, staking_requirement);
-      total_reserved      +=xtend_amount;
+      uint64_t xtend_amount = service_nodes::portions_to_amount(addr_to_portion.portions, staking_requirement);
+      total_reserved      += xtend_amount;
     }
 
     result.success = true;

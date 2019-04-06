@@ -1,5 +1,5 @@
 #include "cryptonote_config.h"
-#include "common/loki.h"
+#include "common/xtend.h"
 #include "int-util.h"
 #include <vector>
 #include <boost/lexical_cast.hpp>

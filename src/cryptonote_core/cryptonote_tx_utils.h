@@ -49,11 +49,11 @@ namespace cryptonote
   uint64_t get_portion_of_reward                (uint64_t portions, uint64_t total_service_node_reward);
   uint64_t service_node_reward_formula          (uint64_t base_reward, int hard_fork_version);
 
-  structxtend_miner_tx_context // NOTE(loki): All the custom fields required byxtend to use construct_miner_tx
+  struct xtend_miner_tx_context // NOTE(xtend): All the custom fields required by xtend to use construct_miner_tx
   {
     using stake_portions = uint64_t;
 
-   xtend_miner_tx_context(network_type type                = MAINNET,
+    xtend_miner_tx_context(network_type type                = MAINNET,
                           crypto::public_key const &winner = crypto::null_pkey,
                           std::vector<std::pair<account_public_address, stake_portions>> const &winner_info = {});
 
@@ -73,7 +73,7 @@ namespace cryptonote
       transaction& tx,
       const blobdata& extra_nonce = blobdata(),
       uint8_t hard_fork_version = 1,
-      constxtend_miner_tx_context &miner_context = {});
+      const xtend_miner_tx_context &miner_context = {});
 
   struct block_reward_parts
   {
@@ -99,7 +99,7 @@ namespace cryptonote
     uint64_t miner_reward() { return base_miner + base_miner_fee; }
   };
 
-  structxtend_block_reward_context
+  struct xtend_block_reward_context
   {
     using portions = uint64_t;
     uint64_t                                                 height;
@@ -108,12 +108,12 @@ namespace cryptonote
     std::vector<std::pair<account_public_address, portions>> snode_winner_info;  // Optional: Check contributor portions add up, else set empty to use service_nodes::null_winner
   };
 
-  // NOTE(loki): I would combine this into get_base_block_reward, but
+  // NOTE(xtend): I would combine this into get_base_block_reward, but
   // cryptonote_basic as a library is to be able to trivially link with
   // cryptonote_core since it would have a circular dependency on Blockchain
 
   // NOTE: Block reward function that should be called after hard fork v10
-  bool get_loki_block_reward(size_t median_weight, size_t current_block_weight, uint64_t already_generated_coins, int hard_fork_version, block_reward_parts &result, constxtend_block_reward_context &loki_context);
+  bool get_xtend_block_reward(size_t median_weight, size_t current_block_weight, uint64_t already_generated_coins, int hard_fork_version, block_reward_parts &result, const xtend_block_reward_context &xtend_context);
 
   struct tx_source_entry
   {
@@ -177,15 +177,15 @@ namespace cryptonote
   crypto::public_key get_destination_view_key_pub(const std::vector<tx_destination_entry> &destinations, const boost::optional<cryptonote::tx_destination_entry>& change_addr);
   bool construct_tx(const account_keys& sender_account_keys, std::vector<tx_source_entry> &sources, const std::vector<tx_destination_entry>& destinations, const boost::optional<cryptonote::tx_destination_entry>& change_addr, const std::vector<uint8_t> &extra, transaction& tx, uint64_t unlock_time, uint8_t hf_version = cryptonote::network_version_7, bool is_staking = false);
 
-  structxtend_construct_tx_params
+  struct xtend_construct_tx_params
   {
     bool                v4_allow_tx_types;
     bool                v3_per_output_unlock;
     bool                v3_is_staking_tx;     // NOTE: Set to true manually if you need a staking transaction
     bool                v2_rct;
 
-   xtend_construct_tx_params() = default;
-   xtend_construct_tx_params(int hf_version)
+    xtend_construct_tx_params() = default;
+    xtend_construct_tx_params(int hf_version)
     {
       *this = {};
       v4_allow_tx_types    = (hf_version >= cryptonote::network_version_11_infinite_staking);
@@ -194,8 +194,8 @@ namespace cryptonote
     }
   };
 
-  bool construct_tx_with_tx_key   (const account_keys& sender_account_keys, const std::unordered_map<crypto::public_key, subaddress_index>& subaddresses, std::vector<tx_source_entry>& sources, std::vector<tx_destination_entry>& destinations, const boost::optional<cryptonote::tx_destination_entry>& change_addr, const std::vector<uint8_t> &extra, transaction& tx, uint64_t unlock_time, const crypto::secret_key &tx_key, const std::vector<crypto::secret_key> &additional_tx_keys, const rct::RCTConfig &rct_config = { rct::RangeProofBorromean, 0}, rct::multisig_out *msout = NULL, bool shuffle_outs = true,xtend_construct_tx_params const tx_params = {});
-  bool construct_tx_and_get_tx_key(const account_keys& sender_account_keys, const std::unordered_map<crypto::public_key, subaddress_index>& subaddresses, std::vector<tx_source_entry>& sources, std::vector<tx_destination_entry>& destinations, const boost::optional<cryptonote::tx_destination_entry>& change_addr, const std::vector<uint8_t> &extra, transaction& tx, uint64_t unlock_time,       crypto::secret_key &tx_key,       std::vector<crypto::secret_key> &additional_tx_keys, const rct::RCTConfig &rct_config = { rct::RangeProofBorromean, 0}, rct::multisig_out *msout = NULL,xtend_construct_tx_params const tx_params = {});
+  bool construct_tx_with_tx_key   (const account_keys& sender_account_keys, const std::unordered_map<crypto::public_key, subaddress_index>& subaddresses, std::vector<tx_source_entry>& sources, std::vector<tx_destination_entry>& destinations, const boost::optional<cryptonote::tx_destination_entry>& change_addr, const std::vector<uint8_t> &extra, transaction& tx, uint64_t unlock_time, const crypto::secret_key &tx_key, const std::vector<crypto::secret_key> &additional_tx_keys, const rct::RCTConfig &rct_config = { rct::RangeProofBorromean, 0}, rct::multisig_out *msout = NULL, bool shuffle_outs = true, xtend_construct_tx_params const tx_params = {});
+  bool construct_tx_and_get_tx_key(const account_keys& sender_account_keys, const std::unordered_map<crypto::public_key, subaddress_index>& subaddresses, std::vector<tx_source_entry>& sources, std::vector<tx_destination_entry>& destinations, const boost::optional<cryptonote::tx_destination_entry>& change_addr, const std::vector<uint8_t> &extra, transaction& tx, uint64_t unlock_time,       crypto::secret_key &tx_key,       std::vector<crypto::secret_key> &additional_tx_keys, const rct::RCTConfig &rct_config = { rct::RangeProofBorromean, 0}, rct::multisig_out *msout = NULL, xtend_construct_tx_params const tx_params = {});
   bool generate_output_ephemeral_keys(const size_t tx_version, bool &found_change,
                                       const cryptonote::account_keys &sender_account_keys, const crypto::public_key &txkey_pub,  const crypto::secret_key &tx_key,
                                       const cryptonote::tx_destination_entry &dst_entr, const boost::optional<cryptonote::tx_destination_entry> &change_addr, const size_t output_index,

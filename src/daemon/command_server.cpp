@@ -33,11 +33,11 @@
 #include "string_tools.h"
 #include "daemon/command_server.h"
 
-#include "common/loki_integration_test_hooks.h"
+#include "common/xtend_integration_test_hooks.h"
 
 
-#undefXTEND_DEFAULT_LOG_CATEGORY
-#defineXTEND_DEFAULT_LOG_CATEGORY "daemon"
+#undef XTEND_DEFAULT_LOG_CATEGORY
+#define XTEND_DEFAULT_LOG_CATEGORY "daemon"
 
 namespace daemonize {
 

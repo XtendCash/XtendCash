@@ -41,15 +41,15 @@
 #include "cryptonote_basic/hardfork.h"
 #include <boost/format.hpp>
 
-#include "common/loki_integration_test_hooks.h"
+#include "common/xtend_integration_test_hooks.h"
 
 #include <fstream>
 #include <ctime>
 #include <string>
 #include <numeric>
 
-#undefXTEND_DEFAULT_LOG_CATEGORY
-#defineXTEND_DEFAULT_LOG_CATEGORY "daemon"
+#undef XTEND_DEFAULT_LOG_CATEGORY
+#define XTEND_DEFAULT_LOG_CATEGORY "daemon"
 
 namespace daemonize {
 
