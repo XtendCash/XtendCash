@@ -1,7 +1,5 @@
 # XtendCash
 
-<p align="center">
-    <a href="https://github.com/xtend-project/xtend/commits/dev"><img alt="pipeline status" src="https://gitlab.com/xtendproject/xtend/badges/dev/pipeline.svg" /></a>
 </p>
 
 Copyright (c) 2019 The XtendCash Project.   
