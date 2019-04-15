@@ -169,8 +169,8 @@ bool gen_service_nodes::check_registered(cryptonote::core& c, size_t ev_index, c
   r = find_block_chain(events, chain, mtx, get_block_hash(blocks.back()));
   CHECK_TEST_CONDITION(r);
 
-  // Expect the change to have unlock time of 0, and we get that back immediately ~0.8 loki
-  // 101 (balance) - 100 (stake) - 0.2 (test fee) = 0.8 loki
+  // Expect the change to have unlock time of 0, and we get that back immediately ~0.8 xtend
+  // 101 (balance) - 100 (stake) - 0.2 (test fee) = 0.8 xtend
   const uint64_t unlocked_balance    = get_unlocked_balance(alice, blocks, mtx);
   const uint64_t staking_requirement = MK_COINS(100);
 
