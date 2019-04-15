@@ -1,9 +1,9 @@
 Gitian building
 ================
 
-*Setup instructions for a Gitian build of Loki using a VM or physical system.*
+*Setup instructions for a Gitian build of XtendCash using a VM or physical system.*
 
-Gitian is the deterministic build process that is used to build the Loki CLI
+Gitian is the deterministic build process that is used to build the XtendCash CLI
 executables. It provides a way to be reasonably sure that the
 executables are really built from the git source. It also makes sure that
 the same, tested dependencies are used and statically built into the executable.
@@ -74,16 +74,16 @@ Initial Gitian Setup
 The `gitian-build.py` script will checkout different release tags, so it's best to copy it:
 
 ```bash
-cp loki/contrib/gitian/gitian-build.py .
+cp xtend/contrib/gitian/gitian-build.py .
 ```
 
 Setup the required environment, you only need to do this once:
 
 ```
-./gitian-build.py --setup loki-user x.x.x
+./gitian-build.py --setup xtend-user x.x.x
 ```
 
-Where `loki-user` is your Github name and `x.x.x` is the version tag you want to build.
+Where `xtend-user` is your Github name and `x.x.x` is the version tag you want to build.
 
 While gitian and this build script does provide a way for you to sign the build directly, it is recommended to sign in a seperate step. 
 This script is only there for convenience. Seperate steps for building can still be taken.
@@ -92,15 +92,15 @@ fork the gitian.sigs repository and clone it on your host machine,
 or pass the signed assert file back to your build machine.
 
 ```
-git clone git@github.com:loki-project/gitian.sigs.git
-git remote add loki-user git@github.com:loki-user/gitian.sigs.git
+git clone git@github.com:xtendcash/gitian.sigs.git
+git remote add xtend-user git@github.com:xtend-user/gitian.sigs.git
 ```
 
 Build Binaries
 -----------------------------
 To build the most recent tag:
 
- `./gitian-build.py --detach-sign --no-commit -b loki-user 2.0.0`
+ `./gitian-build.py --detach-sign --no-commit -b xtend-user 2.0.0`
 
 To speed up the build, use `-j 5 -m 5000` as the first arguments, where `5` is the number of CPU's you allocated to the VM plus one, and 5000 is a little bit less than then the MB's of RAM you allocated. If there is memory corruption on your machine, try to tweak these values.
 
@@ -109,15 +109,15 @@ If all went well, this produces a number of (uncommited) `.assert` files in the 
 If you do detached, offline signing, you need to copy these uncommited changes to your host machine, where you can sign them. For example:
 
 ```
-export NAME=loki-user
+export NAME=xtend-user
 export VERSION=2.0.0
-gpg --output $VERSION-linux/$NAME/loki-linux-$VERSION-build.assert.sig --detach-sign $VERSION-linux/$NAME/loki-linux-$VERSION-build.assert
-gpg --output $VERSION-osx-unsigned/$NAME/loki-osx-$VERSION-build.assert.sig --detach-sign $VERSION-osx-unsigned/$NAME/loki-osx-$VERSION-build.assert
-gpg --output $VERSION-win-unsigned/$NAME/loki-win-$VERSION-build.assert.sig --detach-sign $VERSION-win-unsigned/$NAME/loki-win-$VERSION-build.assert
+gpg --output $VERSION-linux/$NAME/xtend-linux-$VERSION-build.assert.sig --detach-sign $VERSION-linux/$NAME/xtend-linux-$VERSION-build.assert
+gpg --output $VERSION-osx-unsigned/$NAME/xtend-osx-$VERSION-build.assert.sig --detach-sign $VERSION-osx-unsigned/$NAME/xtend-osx-$VERSION-build.assert
+gpg --output $VERSION-win-unsigned/$NAME/xtend-win-$VERSION-build.assert.sig --detach-sign $VERSION-win-unsigned/$NAME/xtend-win-$VERSION-build.assert
 ```
 
 Make a pull request (both the `.assert` and `.assert.sig` files) to the
-[loki-project/gitian.sigs](https://github.com/loki-project/gitian.sigs/) repository:
+[xtend-project/gitian.sigs](https://github.com/xtendcash/gitian.sigs/) repository:
 
 ```
 git checkout -b 2.0.0
@@ -126,8 +126,8 @@ git push --set-upstream $NAME 2.0.0
 ```
 
 ```bash
-    gpg --detach-sign ${VERSION}-linux/${SIGNER}/loki-linux-*-build.assert
-    gpg --detach-sign ${VERSION}-win-unsigned/${SIGNER}/loki-win-*-build.assert
-    gpg --detach-sign ${VERSION}-osx-unsigned/${SIGNER}/loki-osx-*-build.assert
+    gpg --detach-sign ${VERSION}-linux/${SIGNER}/xtend-linux-*-build.assert
+    gpg --detach-sign ${VERSION}-win-unsigned/${SIGNER}/xtend-win-*-build.assert
+    gpg --detach-sign ${VERSION}-osx-unsigned/${SIGNER}/xtend-osx-*-build.assert
 ```
 

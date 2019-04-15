@@ -82,7 +82,7 @@ namespace service_nodes
                     const service_nodes::quorum_state &quorum_state,
                     cryptonote::transaction &tx);
 
-      // TODO(loki): Review relay behaviour and all the cases when it should be triggered
+      // TODO(xtend): Review relay behaviour and all the cases when it should be triggered
       void                         set_relayed         (const std::vector<deregister_vote>& votes);
       void                         remove_expired_votes(uint64_t height);
       void                         remove_used_votes   (std::vector<cryptonote::transaction> const &txs);

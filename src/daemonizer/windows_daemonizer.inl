@@ -177,7 +177,7 @@ namespace daemonizer
     }
     else // interactive
     {
-      //LOG_PRINT_L0("Loki '" <<XTEND_RELEASE_NAME << "' (v" <<XTEND_VERSION_FULL);
+      //LOG_PRINT_L0("XtendCash '" <<XTEND_RELEASE_NAME << "' (v" <<XTEND_VERSION_FULL);
       return executor.run_interactive(vm);
     }
 

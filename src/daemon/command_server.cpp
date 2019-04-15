@@ -360,7 +360,7 @@ bool t_command_server::process_command_vec(const std::vector<std::string>& cmd)
   return result;
 }
 
-#if defined(LOKI_ENABLE_INTEGRATION_TEST_HOOKS)
+#if defined(XTEND_ENABLE_INTEGRATION_TEST_HOOKS)
 #include <thread>
 #endif
 
@@ -368,11 +368,11 @@ bool t_command_server::start_handling(std::function<void(void)> exit_handler)
 {
   if (m_is_rpc) return false;
 
-#if defined(LOKI_ENABLE_INTEGRATION_TEST_HOOKS)
+#if defined(XTEND_ENABLE_INTEGRATION_TEST_HOOKS)
   auto handle_shared_mem_ins_and_outs = [&]()
   {
     // TODO(doyle): Hack, don't hook into input until the daemon has completely initialised, i.e. you can print the status
-    while(!loki::core_is_idle) {}
+    while(!xtend::core_is_idle) {}
     mlog_set_categories("");
 
     for (;;)
@@ -380,7 +380,7 @@ bool t_command_server::start_handling(std::function<void(void)> exit_handler)
      xtend::fixed_buffer const input =xtend::read_from_stdin_shared_mem();
       std::vector<std::string> args  =xtend::separate_stdin_to_space_delim_args(&input);
       {
-        boost::unique_lock<boost::mutex> scoped_lock(loki::integration_test_mutex);
+        boost::unique_lock<boost::mutex> scoped_lock(xtend::integration_test_mutex);
        xtend::use_standard_cout();
         std::cout << input.data << std::endl;
        xtend::use_redirected_cout();
@@ -426,7 +426,7 @@ bool t_command_server::help(const std::vector<std::string>& args)
 std::string t_command_server::get_commands_str()
 {
   std::stringstream ss;
-  ss << "Loki '" <<XTEND_RELEASE_NAME << "' (v" <<XTEND_VERSION_FULL << ")" << std::endl;
+  ss << "XtendCash '" <<XTEND_RELEASE_NAME << "' (v" <<XTEND_VERSION_FULL << ")" << std::endl;
   ss << "Commands: " << std::endl;
   std::string usage = m_command_lookup.get_usage();
   boost::replace_all(usage, "\n", "\n  ");
