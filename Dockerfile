@@ -196,4 +196,4 @@ VOLUME /wallet
 EXPOSE 33123
 EXPOSE 33124
 
-ENTRYPOINT ["xtendcashd", "--p2p-bind-ip=0.0.0.0", "--p2p-bind-port=33123", "--rpc-bind-ip=0.0.0.0", "--rpc-bind-port=33124", "--non-interactive", "--confirm-external-bind"]
+#ENTRYPOINT ["xtendcashd", "--p2p-bind-ip=0.0.0.0", "--p2p-bind-port=33123", "--rpc-bind-ip=0.0.0.0", "--rpc-bind-port=33124", "--non-interactive", "--confirm-external-bind"]
