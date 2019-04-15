@@ -178,7 +178,7 @@ cryptonote::block linear_chain_generator::create_block_on_fork(const cryptonote:
   sn_list_.handle_deregistrations(deregistration_buffer_);
   deregistration_buffer_.clear();
 
-  /// Note: depending on whether we check in hf9 or later, loki assignes different meaning to
+  /// Note: depending on whether we check in hf9 or later, xtend assignes different meaning to
   /// "expiration height": in hf9 it expires nodes at their expiration height; after hf9 --
   /// a the expiration height + 1.
   if (get_hf_version() == network_version_9_service_nodes) {
@@ -208,7 +208,7 @@ QuorumState linear_chain_generator::get_quorum_idxs(const cryptonote::block& blo
       pub_keys_indexes[i] = i;
     }
 
-    service_nodes::loki_shuffle(pub_keys_indexes, seed);
+    service_nodes::xtend_shuffle(pub_keys_indexes, seed);
   }
 
   QuorumState quorum;
@@ -413,7 +413,7 @@ void test_generator::get_block_chain(std::vector<block_info>& blockchain, const 
   std::reverse(blockchain.begin(), blockchain.end());
 }
 
-// TODO(loki): Copypasta
+// TODO(xtend): Copypasta
 void test_generator::get_block_chain(std::vector<cryptonote::block>& blockchain, const crypto::hash& head, size_t n) const
 {
   crypto::hash curr = head;
@@ -468,7 +468,7 @@ void test_generator::add_block(const cryptonote::block& blk, size_t txs_weight, 
   m_blocks_info.insert({get_block_hash(blk), block_info(blk.prev_id, already_generated_coins + block_reward, block_weight, blk)});
 }
 
-static void manual_calc_batched_governance(const test_generator &generator, const crypto::hash &head, loki_miner_tx_context &miner_tx_context, int hard_fork_version, uint64_t height)
+static void manual_calc_batched_governance(const test_generator &generator, const crypto::hash &head, xtend_miner_tx_context &miner_tx_context, int hard_fork_version, uint64_t height)
 {
   miner_tx_context.batched_governance = 0;
 
@@ -535,7 +535,7 @@ bool test_generator::construct_block(cryptonote::block& blk, uint64_t height, co
   blk.miner_tx = AUTO_VAL_INIT(blk.miner_tx);
   size_t target_block_weight = txs_weight + get_transaction_weight(blk.miner_tx);
 
-  cryptonote::loki_miner_tx_context miner_tx_context(cryptonote::FAKECHAIN, sn_pub_key, sn_infos);
+  cryptonote::xtend_miner_tx_context miner_tx_context(cryptonote::FAKECHAIN, sn_pub_key, sn_infos);
   manual_calc_batched_governance(*this, prev_id, miner_tx_context, m_hf_version, height);
 
   while (true)
@@ -641,7 +641,7 @@ bool test_generator::construct_block_manually(block& blk, const block& prev_bloc
   else
   {
     // TODO: This will work, until size of constructed block is less then CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE
-    cryptonote::loki_miner_tx_context miner_tx_context(cryptonote::FAKECHAIN);
+    cryptonote::xtend_miner_tx_context miner_tx_context(cryptonote::FAKECHAIN);
     manual_calc_batched_governance(*this, prev_id, miner_tx_context, m_hf_version, height);
 
     size_t current_block_weight = txs_weight + get_transaction_weight(blk.miner_tx);

@@ -78,17 +78,6 @@ RUN set -ex \
     && make install \
     && ldconfig
 
-# ncurses
-ARG NCURSES_VERSION=6.1
-ARG READLINE_HASH=750d437185286f40a369e1e4f4764eda932b9459b5ec9a731628393dd3d32334
-RUN set -ex \
-    && curl -s -O ftp://ftp.invisible-island.net/ncurses/ncurses-6.1.tar.gz \
-    && tar -xzf ncurses-${NCURSES_VERSION}.tar.gz \
-    && cd ncurses-${NCURSES_VERSION} \
-    && CFLAGS="-fPIC" CXXFLAGS="-P -fPIC" ./configure --enable-termcap --with-termlib \
-    && make \
-    && make install
-
 # zmq.hpp
 ARG CPPZMQ_VERSION=v4.3.0
 ARG CPPZMQ_HASH=213da0b04ae3b4d846c9abc46bab87f86bfb9cf4
