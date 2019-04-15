@@ -15,17 +15,12 @@ Portions Copyright (c) 2012-2013 The Cryptonote developers.
 - GitHub: [https://github.com/XtendCash](https://github.com/XtendCash)
 - Discord: [https://discord.gg/67GXfD6](https://discord.gg/67GXfD6)
 
-## Vulnerability disclosure
-
-- Check out our [Vulnerability Response Process](https://xtend-project.github.io/xtend-docs/Contributing/VULNERABILITY_RESPONSE_XTEND), encourages prompt disclosure of any Vulnerabilities
 
 ## Information
 
-Xtend is a private cryptocurrency based on Monero. XtendCash currently offers an incentivised full node layer, over the coming months we will be looking to support a secondary p2p network (Xtendnet) and a messenger that offers private communications based on the Signal protocol (Xtend Messenger).
+Xtend is a private cryptocurrency based on Monero. XtendCash currently offers an incentivised full node layer.
 
-More information on the project can be found on the website and in the whitepaper.
-
-Xtend is an open source project, and we encourage contributions from anyone with something to offer. For more information on contributing, please contact team@Xtend.network
+Xtend is an open source project, and we encourage contributions from anyone with something to offer. For more information on contributing, please contact team@xtendcash.com
 
 ## Compiling XtendCash from source
 
