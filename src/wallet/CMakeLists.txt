@@ -108,7 +108,7 @@ if (NOT XTEND_DAEMON_AND_WALLET_ONLY)
       ${EXTRA_LIBRARIES})
   set_property(TARGET wallet_rpc_server
     PROPERTY
-      OUTPUT_NAME "xtend-wallet-rpc")
+      OUTPUT_NAME "xtendcash-wallet-rpc")
   install(TARGETS wallet_rpc_server DESTINATION bin)
 endif()
 
