@@ -158,7 +158,7 @@ endif()
 
 set_property(TARGET blockchain_import
 	PROPERTY
-	OUTPUT_NAME "xtend-blockchain-import")
+	OUTPUT_NAME "xtendcash-blockchain-import")
 install(TARGETS blockchain_import DESTINATION bin)
 
 xtend_add_executable(blockchain_export
@@ -265,7 +265,7 @@ target_link_libraries(blockchain_depth
 
 set_property(TARGET blockchain_depth
 	PROPERTY
-	OUTPUT_NAME "xtend-blockchain-depth")
+	OUTPUT_NAME "xtendcash-blockchain-depth")
 install(TARGETS blockchain_depth DESTINATION bin)
 
 xtend_add_executable(blockchain_stats
@@ -317,7 +317,7 @@ xtend_add_executable(blockchain_prune
 
 set_property(TARGET blockchain_prune
 	PROPERTY
-	OUTPUT_NAME "xtend-blockchain-prune")
+	OUTPUT_NAME "xtendcash-blockchain-prune")
 install(TARGETS blockchain_prune DESTINATION bin)
 
 target_link_libraries(blockchain_prune
