@@ -75,7 +75,7 @@ static_assert(STAKING_PORTIONS % 3 == 0, "Use a multiple of three, so that it di
 #define EMISSION_SUPPLY_MULTIPLIER                      19
 #define EMISSION_SUPPLY_DIVISOR                         10
 #define EMISSION_DIVISOR                                2000000
-#define XTEND_EXCHANGE_PREMINE                          ((uint64_t)3747341000000000)
+#define XTEND_EXCHANGE_PREMINE                          ((uint64_t)29801304000000000)
 
 #define CRYPTONOTE_REWARD_BLOCKS_WINDOW                 100
 #define CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE_V2    60000 //size of block (bytes) after which reward for block calculated using block size
@@ -205,8 +205,8 @@ namespace config
   uint64_t const GOVERNANCE_REWARD_INTERVAL_IN_BLOCKS = (50000000 / DIFFICULTY_TARGET_V2);
   std::string const GOVERNANCE_WALLET_ADDRESS[] =
   {
-    "LCFxT37LAogDn1jLQKf4y7aAqfi21DjovX9qyijaLYQSdrxY1U5VGcnMJMjWrD9RhjeK5Lym67wZ73uh9AujXLQ1RKmXEyL", // hardfork v7-10
-    "LDBEN6Ut4NkMwyaXWZ7kBEAx8X64o6YtDhLXUP26uLHyYT4nFmcaPU2Z2fauqrhTLh4Qfr61pUUZVLaTHqAdycETKM1STrz", // hardfork v11
+    "XtazhXWxuGvE6PaeuEf7w7GLH97FjTWKs1A4ycCRtWy2ECiCp2RZ55q6LB7MoDCHzoDMzr7jPiBijWYXtfqSruKzfrAs1Y5EuXU", // hardfork v7-10
+    "XtazhTipL1U6jrXremUrwQ6oEKoDmNi18BtopbTWcUBCgocz8nHLgD7inEP4sGqVEPSsziQGtqPjdAkGWuPojWoccJBaxdwMxWs", // hardfork v11
   };
 
   namespace testnet
@@ -226,8 +226,8 @@ namespace config
     uint64_t const GOVERNANCE_REWARD_INTERVAL_IN_BLOCKS = 1000;
     std::string const GOVERNANCE_WALLET_ADDRESS[] =
     {
-      "T6SUprTYE5rQpep9iQFxyPcKVd91DFR1fQ1Qsyqp5eYLiFc8XuYd3reRE71qDL8c3DXioUbDEpDFdaUpetnL37NS1R3rzoKxi", // hardfork v7-9
-      "T6TzkJb5EiASaCkcH7idBEi1HSrpSQJE1Zq3aL65ojBMPZvqHNYPTL56i3dncGVNEYCG5QG5zrBmRiVwcg6b1cRM1SRNqbp44", // hardfork v10
+      "jEJum4pibHjTAp2FswL9R5TXJJ5Hcz1jXcpKYMNjViZhNKKpPTJ7ppPQb5jaMnwBXkUUr3NNXoiboigp3v5xGiZ82yP7jx8pX", // hardfork v7-9
+      "jEJnDpurbUZ5pzkhGkE3w2U7BYBVtvAx1H2YbNfvZzQxKMJHePadVdUTcFsnSFjJxob6wqkn2sQCcTcmvpz7nU4F3AcUVYdKj", // hardfork v10
     };
 
   }
@@ -249,8 +249,8 @@ namespace config
     uint64_t const GOVERNANCE_REWARD_INTERVAL_IN_BLOCKS = ((60 * 60 * 24 * 7) / DIFFICULTY_TARGET_V2);
     std::string const GOVERNANCE_WALLET_ADDRESS[] =
     {
-      "59f7FCwYMiwMnFr8HwsnfJ2hK3DYB1tryhjsfmXqEBJojKyqKeNWoaDaZaauoZPiZHUYp2wJuy5s9H96qy4q9xUVCXXHmTU", // hardfork v7-9
-      "59f7FCwYMiwMnFr8HwsnfJ2hK3DYB1tryhjsfmXqEBJojKyqKeNWoaDaZaauoZPiZHUYp2wJuy5s9H96qy4q9xUVCXXHmTU", // hardfork v10
+      "YQG1c5KwHcSGZQCxDNBubnWWEDzvg8x7ehXutmRbT1KaV5bvVaKissTbgFxcRJN1kmBq7fqpt6jrnFSxfYBgQTBY44CNQRnXoW", // hardfork v7-9
+      "YQG1pVZ4E4dLGCFxZbUhSuc2s5eVfRKjKch7eQywXspxTamTaFXjacWe9dLbaepKGLFZyDtC1dizuXokQMediQU94nBMJfBJgm", // hardfork v10
     };
   }
 }
