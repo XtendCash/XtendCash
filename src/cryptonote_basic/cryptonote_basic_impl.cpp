@@ -90,18 +90,6 @@ namespace cryptonote {
   //-----------------------------------------------------------------------------------------------
   bool get_base_block_reward(size_t median_weight, size_t current_block_weight, uint64_t already_generated_coins, uint64_t &reward, uint8_t version, uint64_t height) {
 
-    //premine reward
-    if (already_generated_coins == 0)
-    {
-      reward = 22500000000000000;
-      return true;
-    }
-
-    static_assert(DIFFICULTY_TARGET_V2%60==0,"difficulty targets must be a multiple of 60");
-
-    uint64_t emission_supply_component = (already_generated_coins * EMISSION_SUPPLY_MULTIPLIER) / EMISSION_SUPPLY_DIVISOR;
-    uint64_t base_reward = (EMISSION_LINEAR_BASE - emission_supply_component) / EMISSION_DIVISOR;
-
 //**********************************XtendCash EXCHANGE COINS PREMINE Settings***************
     const uint64_t premine = XTEND_EXCHANGE_PREMINE;
     if (median_weight > 0 && already_generated_coins < premine) {
@@ -110,8 +98,13 @@ namespace cryptonote {
     }
  //****************************************************************************************
 
+    static_assert(DIFFICULTY_TARGET_V2%60==0,"difficulty targets must be a multiple of 60");
+
+    uint64_t emission_supply_component = (already_generated_coins * EMISSION_SUPPLY_MULTIPLIER) / EMISSION_SUPPLY_DIVISOR;
+    uint64_t base_reward = (EMISSION_LINEAR_BASE - emission_supply_component) / EMISSION_DIVISOR;
+
     if (version >= 8)
-      base_reward = 28000000000.0 + 100000000000.0 / xtend::exp2(height / (720.0 * 90.0)); // halve every 90 days.
+      base_reward = 28000000000.0 + 20000000000.0 / xtend::exp2(height / (720.0 * 90.0)); // halve every 90 days.
 
     uint64_t full_reward_zone = get_min_block_weight(version);
 
