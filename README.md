@@ -575,7 +575,7 @@ Install valgrind and run as `valgrind /path/to/xtendd`. It will be very slow.
 
 ### LMDB
 
-Instructions for debugging suspected blockchain corruption as per @HYC
+ Instructions for debugging suspected blockchain corruption as per @HYC
 
 There is an `mdb_stat` command in the LMDB source that can print statistics about the database but it's not routinely built. This can be built with the following command:
 
