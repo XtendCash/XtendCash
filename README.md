@@ -1,4 +1,4 @@
-# XtendCash
+# XtendCash - Please note this repo contains some errors, we will be working on minor big fixes shortly.
 
 </p>
 
