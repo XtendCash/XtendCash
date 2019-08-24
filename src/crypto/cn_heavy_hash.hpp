@@ -37,6 +37,7 @@
 #include <assert.h>
 #include <string.h>
 #include <boost/align/aligned_alloc.hpp>
+#include "cuckaroo/cuckaroo29s.h"
 
 #if defined(_WIN32) || defined(_WIN64)
 #include <malloc.h>
@@ -139,6 +140,7 @@ private:
 template<size_t MEMORY, size_t ITER, size_t VERSION> class cn_heavy_hash;
 using cn_heavy_hash_v1 = cn_heavy_hash<2*1024*1024, 0x80000, 0>;
 using cn_heavy_hash_v2 = cn_heavy_hash<4*1024*1024, 0x40000, 1>;
+using cn_heavy_hash_v3 = cn_heavy_hash<2*1024*1024, 0x20000, 2>;
 
 template<size_t MEMORY, size_t ITER, size_t VERSION>
 class cn_heavy_hash
@@ -162,6 +164,7 @@ public:
 	{
 		return cn_heavy_hash_v1(t.lpad.as_void(), t.spad.as_void());
 	}
+
 
 	cn_heavy_hash& operator= (cn_heavy_hash&& other) noexcept
     {
@@ -192,6 +195,11 @@ public:
 			software_hash(in, len, out, prehashed);
 	}
 
+	void hashc29(const void* in, size_t len, uint32_t nonce, uint32_t *edges, void* out)
+	{
+		cu->hash(in,len,nonce,edges,out);
+	}
+	
 	void software_hash(const void* in, size_t len, void* out, bool prehashed);
 	
 #if !defined(HAS_INTEL_HW) && !defined(HAS_ARM_HW)
@@ -202,8 +210,10 @@ public:
 
 private:
 	static constexpr size_t MASK = ((MEMORY-1) >> 4) << 4;
+	Cuckaroo29S* cu = new Cuckaroo29S();
 	friend cn_heavy_hash_v1;
 	friend cn_heavy_hash_v2;
+	friend cn_heavy_hash_v3;
 
 	// Constructor enabling v1 hash to borrow v2's buffer
 	cn_heavy_hash(void* lptr, void* sptr)
@@ -261,3 +271,4 @@ private:
 
 extern template class cn_heavy_hash<2*1024*1024, 0x80000, 0>;
 extern template class cn_heavy_hash<4*1024*1024, 0x40000, 1>;
+extern template class cn_heavy_hash<2*1024*1024, 0x20000, 2>;

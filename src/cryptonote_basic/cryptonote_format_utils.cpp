@@ -1471,7 +1471,7 @@ namespace cryptonote
         uint32_t edges[32];
         for(int i = 0; i < 32; i++) edges[i] = b.cycle.data[i];
 
-        ctx.hashc29(bd.data(), bd.size(), b.nonce, edges, res.data);
+        cn_type = cn_slow_hash_type::cukaroo_v2;;
     }
 	else {
     if (hf_version == network_version_11_infinite_staking)

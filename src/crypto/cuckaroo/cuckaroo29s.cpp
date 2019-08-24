@@ -159,3 +159,4 @@ int Cuckaroo29S::hash(const void* in, size_t len, uint32_t nonce, uint32_t *edge
 	
 	return retval;
 };
+

@@ -477,7 +477,6 @@ bool t_rpc_command_executor::show_status() {
   cryptonote::COMMAND_RPC_HARD_FORK_INFO::response hfres;
   cryptonote::COMMAND_RPC_MINING_STATUS::request mreq;
   cryptonote::COMMAND_RPC_MINING_STATUS::response mres;
-  cryptonote::COMMAND_RPC_HARD_FORK_INFO::response hfres;
   epee::json_rpc::error error_resp;
   bool has_mining_info = true;
 
