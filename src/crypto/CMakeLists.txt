@@ -28,6 +28,8 @@
 # THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 set(crypto_sources
+  cuckaroo/cuckaroo29s.cpp
+  cuckaroo/blake2b-ref.c
   aesb.c
   blake256.c
   chacha.c
@@ -54,6 +56,11 @@ set(crypto_sources
 set(crypto_headers)
 
 set(crypto_private_headers
+  cuckaroo/cuckaroo29s.h
+  cuckaroo/blake2.h
+  cuckaroo/blake2-impl.h
+  cuckaroo/int-util.h
+  cuckaroo/portable_endian.h
   blake256.h
   chacha.h
   crypto-ops.h

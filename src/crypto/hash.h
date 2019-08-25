@@ -46,6 +46,10 @@ namespace crypto {
   }
 
 #pragma pack(push, 1)
+  POD_CLASS cycle {
+    public:
+    uint32_t data[32];
+  };
   POD_CLASS hash {
     char data[HASH_SIZE];
   };
@@ -76,6 +80,7 @@ namespace crypto {
       heavy_v1,
       heavy_v2,
       turtle_lite_v2,
+	  cukaroo_v2,
   };
 
   inline void cn_slow_hash(const void *data, std::size_t length, hash &hash, cn_slow_hash_type type) {
@@ -107,6 +112,29 @@ namespace crypto {
              CN_TURTLE_PAGE_SIZE, CN_TURTLE_SCRATCHPAD, CN_TURTLE_ITERATIONS);
       }
       break;
+	  
+	  case cn_slow_hash_type::cukaroo_v2: 
+	  {
+		  static thread_local cn_heavy_hash_v2 v2;
+		  static thread_local cn_heavy_hash_v1 v1 = cn_heavy_hash_v1::make_borrowed(v2);
+		  if (type == cn_slow_hash_type::turtle_lite_v2)   
+		  {
+         const uint32_t CN_TURTLE_PAGE_SIZE = 262144;
+         const uint32_t CN_TURTLE_SCRATCHPAD = 262144;
+         const uint32_t CN_TURTLE_ITERATIONS = 131072;
+         cn_turtle_hash(data,
+             length,
+             hash.data,
+             1, // light
+             2, // variant
+             0, // pre-hashed
+             CN_TURTLE_PAGE_SIZE, CN_TURTLE_SCRATCHPAD, CN_TURTLE_ITERATIONS);
+		  }
+		 else	 v2.hash(data, length, hash.data);
+		  }
+		 
+	 
+  break;
     }
   }
 
