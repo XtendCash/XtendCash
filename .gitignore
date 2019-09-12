@@ -1,2 +1,4 @@
 .vscode/
 build/
+external/rapidjson
+external/trezor-common
