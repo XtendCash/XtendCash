@@ -9,11 +9,9 @@
 # For lists items can also be appended using:
 #       TAG += value [value, ...]
 # Values that contain spaces should be placed between quotes (" ")
-
 #---------------------------------------------------------------------------
-# Project related configuration options
+# Project related configuration options for Doxygen
 #---------------------------------------------------------------------------
-
 # This tag specifies the encoding used for all characters in the config file 
 # that follow. The default is UTF-8 which is also the encoding used for all 
 # text before the first occurrence of this tag. Doxygen uses libiconv (or the 
