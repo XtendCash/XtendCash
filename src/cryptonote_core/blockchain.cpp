@@ -881,7 +881,7 @@ difficulty_type Blockchain::get_difficulty_for_next_block()
   //    then when the next block difficulty is queried, push the latest height data and
   //    pop the oldest one from the list. This only requires 1x read per height instead
   //    of doing 735 (DIFFICULTY_BLOCKS_COUNT).
-  
+
     // Reset network hashrate for hardfork Cuckaroo
   if ((uint64_t)height >= 105000 && (uint64_t)height <= 105000 + (uint64_t)DIFFICULTY_BLOCKS_COUNT_V2){
     return (difficulty_type) 5000;

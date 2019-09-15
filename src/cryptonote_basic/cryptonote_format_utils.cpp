@@ -43,6 +43,7 @@
 #include "cryptonote_basic/verification_context.h"
 #include "cryptonote_core/service_node_deregister.h"
 
+
 using namespace epee;
 
 #undef XTEND_DEFAULT_LOG_CATEGORY
@@ -1408,23 +1409,20 @@ namespace cryptonote
   {
     blobdata blob;
 
-    if(b.major_version < HF_VERSION_CUCKOO)
-    {
-      blob = t_serializable_object_to_blob(static_cast<block_header>(b));
-    }
-    else
-    {
-      blob = t_serializable_object_to_blob(b.major_version);
-      blob.append(reinterpret_cast<const char*>(&b.minor_version), sizeof(b.minor_version));
-      blob.append(reinterpret_cast<const char*>(&b.timestamp), sizeof(b.timestamp));
-      blob.append(reinterpret_cast<const char*>(&b.prev_id), sizeof(b.prev_id));
-    }
+  	if(b.major_version < HF_VERSION_CUCKOO)
+	{
+		blob = t_serializable_object_to_blob(static_cast<block_header>(b));
+	}
+	else
+	{
+		blob = t_serializable_object_to_blob(b.major_version);
+		blob.append(reinterpret_cast<const char*>(&b.minor_version), sizeof(b.minor_version));
+		blob.append(reinterpret_cast<const char*>(&b.timestamp), sizeof(b.timestamp));
+		blob.append(reinterpret_cast<const char*>(&b.prev_id), sizeof(b.prev_id));
+	}
     crypto::hash tree_root_hash = get_tx_tree_hash(b);
     blob.append(reinterpret_cast<const char*>(&tree_root_hash), sizeof(tree_root_hash));
     blob.append(tools::get_varint_data(b.tx_hashes.size()+1));
-    if (b.major_version >= HF_VERSION_NONCE8) {
-        blob.append(reinterpret_cast<const char*>(&b.nonce8), sizeof(b.nonce8));
-    }
     return blob;
   }
   //---------------------------------------------------------------
@@ -1466,22 +1464,25 @@ namespace cryptonote
     const blobdata bd                 = get_block_hashing_blob(b);
     const int hf_version              = b.major_version;
     crypto::cn_slow_hash_type cn_type = cn_slow_hash_type::heavy_v1;
-
-    if (b.major_version >= HF_VERSION_CUCKOO) {
-        uint32_t edges[32];
+		uint32_t edges[32];
         for(int i = 0; i < 32; i++) edges[i] = b.cycle.data[i];
+    if  (hf_version >= network_version_12_cuckaroo) {
+      cn_type = cn_slow_hash_type::cuckaroo_29s;
 
-        cn_type = cn_slow_hash_type::cukaroo_v2;;
-    }
-	else {
-    if (hf_version == network_version_11_infinite_staking)
+
+        crypto::cn_cuckaroo_hash(bd.data(), bd.size(), b.nonce, edges, res);
+	}
+	else 
+	{
+		if (hf_version == network_version_11_infinite_staking)
       cn_type = cn_slow_hash_type::turtle_lite_v2;
+  
     else if (hf_version >= network_version_7)
       cn_type = crypto::cn_slow_hash_type::heavy_v2;
-
+  
     crypto::cn_slow_hash(bd.data(), bd.size(), res, cn_type);
-    return true;
 	}
+	return true;
   }
   //---------------------------------------------------------------
   std::vector<uint64_t> relative_output_offsets_to_absolute(const std::vector<uint64_t>& off)

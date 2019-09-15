@@ -482,6 +482,7 @@ namespace cryptonote
         epee::misc_utils::sleep_no_w(1000);
         continue;
       }
+
       if (b.major_version >= HF_VERSION_CUCKOO)
       {
         miner::send_stop_signal();

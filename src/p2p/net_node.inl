@@ -424,11 +424,13 @@ namespace nodetool
     std::set<std::string> full_addrs;
     if (nettype == cryptonote::TESTNET)
     {
-      full_addrs.insert("52.63.146.137:44123");
+      full_addrs.insert("157.230.145.3:44123"); // Testnet
+	  full_addrs.insert("159.65.101.188:44123"); // Testnet
     }
     else if (nettype == cryptonote::STAGENET)
     {
-      full_addrs.insert("13.211.225.142:55123");
+      full_addrs.insert("157.230.145.3:55123"); // Stagenet
+      full_addrs.insert("159.65.101.188:55123"); // Stagenet
     }
     else if (nettype == cryptonote::FAKECHAIN)
     {
@@ -441,7 +443,6 @@ namespace nodetool
     }
     return full_addrs;
   }
-
   //-----------------------------------------------------------------------------------
   template<class t_payload_net_handler>
   bool node_server<t_payload_net_handler>::init(const boost::program_options::variables_map& vm)

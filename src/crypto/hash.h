@@ -80,7 +80,7 @@ namespace crypto {
       heavy_v1,
       heavy_v2,
       turtle_lite_v2,
-	  cukaroo_v2,
+	  cuckaroo_29s,
   };
 
   inline void cn_slow_hash(const void *data, std::size_t length, hash &hash, cn_slow_hash_type type) {
@@ -89,6 +89,7 @@ namespace crypto {
       case cn_slow_hash_type::heavy_v1:
       case cn_slow_hash_type::heavy_v2:
       {
+
         static thread_local cn_heavy_hash_v2 v2;
         static thread_local cn_heavy_hash_v1 v1 = cn_heavy_hash_v1::make_borrowed(v2);
 
@@ -96,46 +97,36 @@ namespace crypto {
         else                                     v2.hash(data, length, hash.data);
       }
       break;
-
+	 
       case cn_slow_hash_type::turtle_lite_v2:
       default:
       {
-         const uint32_t CN_TURTLE_PAGE_SIZE = 262144;
-         const uint32_t CN_TURTLE_SCRATCHPAD = 262144;
-         const uint32_t CN_TURTLE_ITERATIONS = 131072;
-         cn_turtle_hash(data,
-             length,
-             hash.data,
-             1, // light
-             2, // variant
-             0, // pre-hashed
-             CN_TURTLE_PAGE_SIZE, CN_TURTLE_SCRATCHPAD, CN_TURTLE_ITERATIONS);
+		
+        const uint32_t CN_TURTLE_PAGE_SIZE = 262144;
+        const uint32_t CN_TURTLE_SCRATCHPAD = 262144;
+        const uint32_t CN_TURTLE_ITERATIONS = 131072;
+        cn_turtle_hash(data,
+            length,
+            hash.data,
+            1, // light
+            2, // variant
+            0, // pre-hashed
+            CN_TURTLE_PAGE_SIZE, CN_TURTLE_SCRATCHPAD, CN_TURTLE_ITERATIONS);
       }
       break;
-	  
-	  case cn_slow_hash_type::cukaroo_v2: 
-	  {
-		  static thread_local cn_heavy_hash_v2 v2;
-		  static thread_local cn_heavy_hash_v1 v1 = cn_heavy_hash_v1::make_borrowed(v2);
-		  if (type == cn_slow_hash_type::turtle_lite_v2)   
-		  {
-         const uint32_t CN_TURTLE_PAGE_SIZE = 262144;
-         const uint32_t CN_TURTLE_SCRATCHPAD = 262144;
-         const uint32_t CN_TURTLE_ITERATIONS = 131072;
-         cn_turtle_hash(data,
-             length,
-             hash.data,
-             1, // light
-             2, // variant
-             0, // pre-hashed
-             CN_TURTLE_PAGE_SIZE, CN_TURTLE_SCRATCHPAD, CN_TURTLE_ITERATIONS);
-		  }
-		 else	 v2.hash(data, length, hash.data);
-		  }
-		 
-	 
-  break;
+
     }
+  }
+
+  inline void cn_cuckaroo_hash(const void *data, std::size_t length, uint32_t nonce, uint32_t *edges, hash &hash) {
+	
+		static thread_local cn_heavy_hash_v3 v3;
+                             
+		v3.hashc29(data,
+             length,
+			 nonce,
+             edges,
+			 hash.data);
   }
 
   inline void tree_hash(const hash *hashes, std::size_t count, hash &root_hash) {

@@ -398,5 +398,6 @@ void cn_heavy_hash<MEMORY,ITER,VERSION>::hardware_hash(const void* in, size_t le
 
 template class cn_heavy_hash<2*1024*1024, 0x80000, 0>;
 template class cn_heavy_hash<4*1024*1024, 0x40000, 1>;
+template class cn_heavy_hash<2*1024*1024, 0x20000, 2>;
 
 #endif
